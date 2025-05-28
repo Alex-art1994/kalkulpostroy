@@ -85,7 +85,7 @@
     <label for="tileWidth">Ширина плитки (см):</label>
     <input type="number" id="tileWidth" placeholder="например, 30">
 
-    <button onclick="calculateTiles()">Рассчитать</button>
+    <button onclick="trackAndCalculate()">Рассчитать</button>
 
     <div id="result"></div>
   </div>
@@ -107,6 +107,16 @@
       const tilesNeeded = Math.ceil(roomArea / tileArea * 1.1); // с запасом 10%
 
       document.getElementById('result').innerText = `Необходимое количество плитки: ${tilesNeeded} шт. (с запасом 10%)`;
+    }
+
+    function trackAndCalculate() {
+      // Отправляем событие в GA4
+      gtag('event', 'calculate_click', {
+        'event_category': 'interaction',
+        'event_label': 'Click Calculate Button'
+      });
+      // Выполняем расчёт
+      calculateTiles();
     }
   </script>
 </body>

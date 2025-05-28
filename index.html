@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Калькулятор плитки</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+    label, input {
+      display: block;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Калькулятор плитки</h1>
+
+  <label>Длина помещения (м): <input type="number" id="length"></label>
+  <label>Ширина помещения (м): <input type="number" id="width"></label>
+  <label>Длина плитки (см): <input type="number" id="tileLength"></label>
+  <label>Ширина плитки (см): <input type="number" id="tileWidth"></label>
+
+  <button onclick="calculateTiles()">Рассчитать</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateTiles() {
+      const length = parseFloat(document.getElementById('length').value);
+      const width = parseFloat(document.getElementById('width').value);
+      const tileLength = parseFloat(document.getElementById('tileLength').value) / 100;
+      const tileWidth = parseFloat(document.getElementById('tileWidth').value) / 100;
+
+      if (isNaN(length) || isNaN(width) || isNaN(tileLength) || isNaN(tileWidth)) {
+        document.getElementById('result').innerText = 'Пожалуйста, введите все значения.';
+        return;
+      }
+
+      const roomArea = length * width;
+      const tileArea = tileLength * tileWidth;
+      const tilesNeeded = Math.ceil(roomArea / tileArea * 1.1); // с запасом 10%
+
+      document.getElementById('result').innerText = `Необходимое количество плитки: ${tilesNeeded} шт. (с запасом 10%)`;
+    }
+  </script>
+</body>
+</html>

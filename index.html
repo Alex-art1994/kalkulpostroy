@@ -4,64 +4,48 @@
   <meta charset="UTF-8">
   <title>Калькулятор плитки</title>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-2653744961958770"
+        crossorigin="anonymous"></script>
+
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FC60HFNFH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}  
-    gtag('js', new Date());  
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
     gtag('config', 'G-8FC60HFNFH');
   </script>
 
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
     body {
-      /* Минималистичный фон */
-      background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)),
-                  url('https://minimalismlab.com/wp-content/uploads/2017/12/matt-le-112706.jpg') center/cover no-repeat fixed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #f9f9f9;
     }
-    .container {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      width: 100%;
-      text-align: center;
-    }
-    label {
+    label, input {
       display: block;
-      margin: 10px 0 5px;
-      text-align: left;
-    }
-    input {
       width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      margin: 10px 0;
       box-sizing: border-box;
     }
+    input {
+      padding: 8px;
+    }
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
+      padding: 10px;
+      background: #007BFF;
+      color: #fff;
       border: none;
       border-radius: 4px;
-      font-size: 16px;
       cursor: pointer;
-      background-color: #007BFF;
-      color: white;
     }
     button:hover {
-      background-color: #0056b3;
+      background: #0056b3;
     }
     #result {
       margin-top: 20px;
@@ -70,53 +54,37 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Калькулятор плитки</h1>
+  <h1>Калькулятор плитки</h1>
 
-    <label for="length">Длина помещения (м):</label>
-    <input type="number" id="length" placeholder="например, 4.5">
+  <label for="length">Длина помещения (м):</label>
+  <input type="number" id="length" placeholder="например, 4.5">
 
-    <label for="width">Ширина помещения (м):</label>
-    <input type="number" id="width" placeholder="например, 3">
+  <label for="width">Ширина помещения (м):</label>
+  <input type="number" id="width" placeholder="например, 3">
 
-    <label for="tileLength">Длина плитки (см):</label>
-    <input type="number" id="tileLength" placeholder="например, 30">
+  <label for="tileLength">Длина плитки (см):</label>
+  <input type="number" id="tileLength" placeholder="например, 30">
 
-    <label for="tileWidth">Ширина плитки (см):</label>
-    <input type="number" id="tileWidth" placeholder="например, 30">
+  <label for="tileWidth">Ширина плитки (см):</label>
+  <input type="number" id="tileWidth" placeholder="например, 30">
 
-    <button onclick="trackAndCalculate()">Рассчитать</button>
-
-    <div id="result"></div>
-  </div>
+  <button onclick="calculateTiles()">Рассчитать</button>
+  <div id="result"></div>
 
   <script>
     function calculateTiles() {
-      const length = parseFloat(document.getElementById('length').value);
-      const width = parseFloat(document.getElementById('width').value);
-      const tileLength = parseFloat(document.getElementById('tileLength').value) / 100;
-      const tileWidth = parseFloat(document.getElementById('tileWidth').value) / 100;
-
-      if (isNaN(length) || isNaN(width) || isNaN(tileLength) || isNaN(tileWidth)) {
-        document.getElementById('result').innerText = 'Пожалуйста, введите все значения.';
+      const l = parseFloat(document.getElementById('length').value);
+      const w = parseFloat(document.getElementById('width').value);
+      const tl = parseFloat(document.getElementById('tileLength').value) / 100;
+      const tw = parseFloat(document.getElementById('tileWidth').value) / 100;
+      if (isNaN(l) || isNaN(w) || isNaN(tl) || isNaN(tw)) {
+        document.getElementById('result').innerText = 'Пожалуйста, заполните все поля.';
         return;
       }
-
-      const roomArea = length * width;
-      const tileArea = tileLength * tileWidth;
-      const tilesNeeded = Math.ceil(roomArea / tileArea * 1.1); // с запасом 10%
-
-      document.getElementById('result').innerText = `Необходимое количество плитки: ${tilesNeeded} шт. (с запасом 10%)`;
-    }
-
-    function trackAndCalculate() {
-      // Отправляем событие в GA4
-      gtag('event', 'calculate_click', {
-        'event_category': 'interaction',
-        'event_label': 'Click Calculate Button'
-      });
-      // Выполняем расчёт
-      calculateTiles();
+      const area = l * w;
+      const tileArea = tl * tw;
+      const count = Math.ceil(area / tileArea * 1.1); // +10% запас
+      document.getElementById('result').innerText = `Вам потребуется примерно ${count} плиток.`;
     }
   </script>
 </body>

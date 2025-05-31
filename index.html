@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="google-adsense-account" content="ca-pub-2653744961958770">
+  <!-- Яндекс-верификация -->
+  <meta name="yandex-verification" content="1a3853421e5cfab9" />
 
   <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-2653744961958770"
@@ -12,64 +13,125 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FC60HFNFH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-8FC60HFNFH');
   </script>
 
+  <!-- Яндекс.Метрика (общий счётчик для всех сайтов) -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){ (m[i].a=m[i].a||[]).push(arguments) };
+      m[i].l=1*new Date();
+      k=e.createElement(t), a=e.getElementsByTagName(t)[0];
+      k.async=1; k.src=r; a.parentNode.insertBefore(k,a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(ВАШ_ID_СЧЁТЧИКА, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true,
+      trackHash:true
+    });
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/ВАШ_ID_СЧЁТЧИКА" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
+
+  <!-- Стили для страницы -->
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
       background: #f9f9f9;
+      margin: 0;
+      padding: 0;
     }
-    label, input {
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
       display: block;
-      width: 100%;
-      margin: 10px 0;
-      box-sizing: border-box;
+      margin: 12px 0 4px;
+      color: #555;
     }
     input {
-      padding: 8px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
     }
     button {
-      padding: 10px;
-      background: #007BFF;
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #007BFF;
       color: #fff;
       border: none;
       border-radius: 4px;
+      font-size: 16px;
       cursor: pointer;
     }
     button:hover {
-      background: #0056b3;
+      background-color: #0056b3;
     }
     #result {
-      margin-top: 20px;
+      margin-top: 24px;
       font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+    footer a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>Калькулятор плитки</h1>
+  <div class="container">
+    <h1>Калькулятор плитки</h1>
 
-  <label for="length">Длина помещения (м):</label>
-  <input type="number" id="length" placeholder="например, 4.5">
+    <label for="length">Длина помещения (м):</label>
+    <input type="number" id="length" placeholder="например, 4.5">
 
-  <label for="width">Ширина помещения (м):</label>
-  <input type="number" id="width" placeholder="например, 3">
+    <label for="width">Ширина помещения (м):</label>
+    <input type="number" id="width" placeholder="например, 3">
 
-  <label for="tileLength">Длина плитки (см):</label>
-  <input type="number" id="tileLength" placeholder="например, 30">
+    <label for="tileLength">Длина плитки (см):</label>
+    <input type="number" id="tileLength" placeholder="например, 30">
 
-  <label for="tileWidth">Ширина плитки (см):</label>
-  <input type="number" id="tileWidth" placeholder="например, 30">
+    <label for="tileWidth">Ширина плитки (см):</label>
+    <input type="number" id="tileWidth" placeholder="например, 30">
 
-  <button onclick="calculateTiles()">Рассчитать</button>
-  <div id="result"></div>
+    <button onclick="calculateTiles()">Рассчитать</button>
+    <div id="result"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Alex-art1994. <a href="https://alex-art1994.github.io/">Все сайты</a>
+  </footer>
 
   <script>
     function calculateTiles() {
